@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Slack') {
       steps {
-        slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Hello from Jenkins"
+        slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Hello from Jenkins and GitHub"
       }
     }
   }
