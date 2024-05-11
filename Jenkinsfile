@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Slack') {
       steps {
-        slackSend color: 'good', message: "env.GIT_AUTHOR: env.GIT_COMMIT_MSG"
+        slackSend color: 'good', message: "{env.GIT_AUTHOR}: {env.GIT_COMMIT_MSG}"
         slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Ale jaja panie Czaja!"
       }
     }
