@@ -6,7 +6,7 @@ pipeline {
      steps {
           script {
              // Retrieve commit ID and branch name, set them as environment variables
-             env.GIT_COMMIT_ID = sh(script: 'git rev-parse HEAD', returnStdout: true).trim().takeRight(6)               
+             env.GIT_COMMIT_ID = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()            
              env.BRANCH_NAME = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
                 }
             }
