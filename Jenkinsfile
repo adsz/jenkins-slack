@@ -8,6 +8,7 @@ pipeline {
                 env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
             }
     }
+    }
     stage('Slack') {
       steps {
 
