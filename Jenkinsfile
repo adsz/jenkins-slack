@@ -6,8 +6,11 @@ pipeline {
      steps {
           script {
              // Retrieve commit ID and branch name, set them as environment variables
-             env.GIT_COMMIT_ID = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()            
+//             env.GIT_COMMIT_ID = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()            
              env.BRANCH_NAME = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+// Retrieve the full commit ID, trim it, and get the last 6 characters using substring method
+             def fullCommitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+             env.GIT_COMMIT_ID = fullCommitId.length() > 6 ? fullCommitId[-6..-1] : fullCommitId
                 }
             }
         }
