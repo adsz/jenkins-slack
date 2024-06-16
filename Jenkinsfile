@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        SLACK_CREDENTIAL_ID = 'slack-token'  // Ensure this matches the ID of the Slack token credential
+        SLACK_CHANNEL = '#jenkins'
+        SLACK_TEAM_DOMAIN = 'devopslabcloud'
+    }
+
     stages {
         stage('Set Env Variables') {
             steps {
@@ -27,8 +33,20 @@ pipeline {
         stage('Slack') {
             steps {
                 // Send the Slack notification with all the details
-                slackSend color: 'good', message: "${env.GIT_AUTHOR}: ${env.GIT_COMMIT_MSG} ${env.BRANCH_NAME} ${env.GIT_COMMIT_ID} ${env.GIT_URL}"
-                slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Polska Gurom!!! Jebać PO i SLD "
+                slackSend(
+                    color: 'good', 
+                    message: "${env.GIT_AUTHOR}: ${env.GIT_COMMIT_MSG} ${env.BRANCH_NAME} ${env.GIT_COMMIT_ID} ${env.GIT_URL}",
+                    tokenCredentialId: env.SLACK_CREDENTIAL_ID,
+                    teamDomain: env.SLACK_TEAM_DOMAIN,
+                    channel: env.SLACK_CHANNEL
+                )
+                slackSend(
+                    color: 'good', 
+                    message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Polska Gurom!!! Jebać PO i SLD",
+                    tokenCredentialId: env.SLACK_CREDENTIAL_ID,
+                    teamDomain: env.SLACK_TEAM_DOMAIN,
+                    channel: env.SLACK_CHANNEL
+                )
             }
         }
     }
