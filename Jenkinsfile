@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // Send the Slack notification with all the details
                 slackSend color: 'good', message: "${env.GIT_AUTHOR}: ${env.GIT_COMMIT_MSG} ${env.BRANCH_NAME} ${env.GIT_COMMIT_ID} ${env.GIT_URL}"
-                slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Polska Gurom!!! Jebać PO"
+                slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: Polska Gurom!!! Jebać PO i SLD"
             }
         }
     }
